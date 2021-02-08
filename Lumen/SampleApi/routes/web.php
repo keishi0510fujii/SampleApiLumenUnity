@@ -15,4 +15,4 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
-$router->get('/user/{id}', 'User\UserController@show');
+$router->get('/user/{id}', 'User\Show');
