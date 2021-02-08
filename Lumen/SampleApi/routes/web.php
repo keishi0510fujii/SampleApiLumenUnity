@@ -15,14 +15,4 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
-$router->get('/user', function () {
-    return response()->json([
-        "name" => "Robin",
-        "level" => 99,
-        "hp" => 999,
-        "mp" => 99,
-        "attack_base" => 255,
-        "protect_base" => 255,
-        "speed" => 255
-    ]);
-});
+$router->get('/user/{id}', 'User\UserController@show');
