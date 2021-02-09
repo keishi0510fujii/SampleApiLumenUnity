@@ -2,7 +2,8 @@
 
 namespace App\Providers;
 
-use App\Infrastructures\Eloquent\GetUserAbilityRepository;
+use App\Infrastructures\QueryBuilder\GetUserAbilityRepository;
+//use App\Infrastructures\Eloquent\GetUserAbilityRepository;
 use App\Repositories\IGetUserAbilityRepository;
 use Illuminate\Support\ServiceProvider;
 
