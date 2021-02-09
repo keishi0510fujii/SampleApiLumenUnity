@@ -4,8 +4,6 @@
 namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Infrastructures\Eloquent\GetUserAbilityRepository;
-use App\User;
-use App\UserAbility;
 
 
 class Show extends Controller
