@@ -26,7 +26,8 @@ class CreateUserAbilitiesTable extends Migration
             // 外部キー制約
             $table->foreign('user_id')
                 ->references('id')
-                ->on('users');
+                ->on('users')
+                ->onDelete('cascade');
         });
     }
 
