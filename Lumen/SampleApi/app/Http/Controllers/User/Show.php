@@ -3,6 +3,7 @@
 
 namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
+use App\Infrastructures\Eloquent\GetUserAbilityRepository;
 use App\User;
 use App\UserAbility;
 
@@ -11,17 +12,8 @@ class Show extends Controller
 {
     public function __invoke($id)
     {
-        $users = factory(User::class, 10)->create();
-
-        $user = $users->where('id', '=', $id)->first();
-        if(is_null($user)){
-            return "No User";
-        }
-
-        $user_ability = factory(UserAbility::class)->create([
-            'user_id' => $id
-        ]);
-
+        $repository = new GetUserAbilityRepository();
+        $user_ability = $repository->handle(intval($id));
         return response()->json([
             'level' => $user_ability->level,
             'hp' => $user_ability->hp,
