@@ -18,6 +18,10 @@ class Show extends Controller
     public function __invoke($id)
     {
         $user_ability = $this->repository->handle(intval($id));
+
+        if(is_null($user_ability)){
+            return "No User Data";
+        }
         return response()->json([
             'level' => $user_ability->level,
             'hp' => $user_ability->hp,

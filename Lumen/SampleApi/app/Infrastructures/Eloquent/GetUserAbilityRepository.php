@@ -4,26 +4,19 @@
 namespace App\Infrastructures\Eloquent;
 
 
+use App\Infrastructures\CreateTestData\CreateTestUserData;
 use App\Repositories\IGetUserAbilityRepository;
-use App\User;
 use App\UserAbility;
 
 class GetUserAbilityRepository implements IGetUserAbilityRepository
 {
     public function handle($id)
     {
-        // このクラスのhandleメソッドを呼び出す時はphp artisan migrate:freshが必要
-        // auto_incrementを初期値に戻すコードがEloquentにはないので。。
-        $users = factory(User::class, 10)->create();
+        // データベースのusersテーブル、user_abilitiesテーブルを空にする
+        // 空にしたテーブルのauto_incrementは初期化する
+        CreateTestUserData::run();
 
-        $user = $users->where('id', '=', $id)->first();
-        if(is_null($user)){
-            return "No User";
-        }
-
-        $user_ability = factory(UserAbility::class)->create([
-            'user_id' => $id
-        ]);
-        return $user_ability;
+        $abilities = UserAbility::all();
+        return $abilities->where('user_id', '=', $id)->first();
     }
 }
