@@ -4,14 +4,20 @@
 namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Infrastructures\Eloquent\GetUserAbilityRepository;
+use App\Repositories\IGetUserAbilityRepository;
 
 
 class Show extends Controller
 {
+    private $repository;
+    public function __construct(IGetUserAbilityRepository $repository)
+    {
+        $this->repository = $repository;
+    }
+
     public function __invoke($id)
     {
-        $repository = new GetUserAbilityRepository();
-        $user_ability = $repository->handle(intval($id));
+        $user_ability = $this->repository->handle(intval($id));
         return response()->json([
             'level' => $user_ability->level,
             'hp' => $user_ability->hp,

@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Infrastructures\Eloquent\GetUserAbilityRepository;
+use App\Repositories\IGetUserAbilityRepository;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -13,6 +15,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->singleton(IGetUserAbilityRepository::class, function($app){
+            return new GetUserAbilityRepository();
+        });
     }
 }
